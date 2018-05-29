@@ -1,0 +1,18 @@
+<launch>
+
+  <node pkg="usb_cam" type="usb_cam_node" name="camera" output="screen">
+    <param name="pixel_format" value="yuyv" />
+    <param name="video_device" type="string" value="/dev/video0" />
+  </node>
+
+  <include file="$(find opencv_detector)/launch/facedetector.launch">
+	<arg name="image_topic" value="/camera/image_raw" />
+  </include>
+
+  <node pkg="detection_msgs" type="patch_visualizer" name="face_visualizer" output="screen">
+    <remap from="camera" to="/camera/image_raw" />
+    <remap from="detections" to="/facedetector/faces" />
+    <param name="cleanup_delay" value="0" />
+  </node>
+
+</launch>

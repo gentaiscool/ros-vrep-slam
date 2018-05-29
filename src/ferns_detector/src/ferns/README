@@ -1,0 +1,69 @@
+                               ferns-demo
+                               ----------
+
+This  software demonstrates  Fern based  keypoint matching  for planar
+object detection.  It also includes  template based tracking  code for
+applications that demand even faster operation.
+
+Homepage: http://cvlab.epfl.ch/software/ferns/index.php
+
+Usage:
+------
+Type
+$ make
+to  compile  the  code  and   generate  the  executable 'ferns-demo'.
+
+The code  depends on the OpenCV  library, so you  should first install
+and  make sure  that  pkg-config can  locate  it.  To  test just  type
+$ pkg-config  opencv --libs  --cflags
+and  you  should get  a list  of compiler flags.
+
+The executable  by default uses 'model.bmp'  and 'model.bmp.roi' files
+to    train   a    Fern   based    classifier   and    save    it   to
+'model.bmp.detector_data'. It  then tries to  open a webcam  and start
+detecting the  object. You can  use the '-v'  flag to specify  a video
+file  as  image  source. So  to  try  detection  on  a video,  type
+$ ./ferns-demo -v mousepad.mp4
+
+You can also use a sequence of images to test detection,
+$ ./ferns-demo -s 'image%04.jpg'
+
+To change  the model object just take  a photo of a  planar object and
+save it.  You can specify a region  of interest by writing  a roi file
+the same name  as your model file + '.roi'  extension. You can specify
+the name of the image using the '-m' option,
+$ ./ferns-demo -m book.jpg
+which   will  use   'book.jpg'  and   'book.roi'  files   to  generate
+'book.jpg.detector_data'
+
+Type
+$ ./ferns_demo -h
+to see a list of command line options.
+
+To  change parameters  for training  just edit  'main.cc' and  see the
+header file for 'planar_pattern_detector_builder.h'.
+
+Template Based Tracking:
+------------------------
+Tracking can be  done much faster than detection  but is less reliable
+and needs  initialization and reinitialization in case  of failure. So
+the executable has  different modes of operation that  can be switched
+by pressing the number keys (0-3).
+
+0: Detect when tracking fails or for initialization then track.
+1: Track only
+2: Detect only (DEFAULT)
+3: Detect + track in every frame
+
+The number  keys 4&5  can be  used to turn  on/off the  recognized and
+ detected keypoints, respectively.
+
+By default  the tracker is  trained using the  same model file  as the
+detector and the tracker data is  saved in a file having the same name
+as the model file + '.tracker_data' extension.
+
+Windows:
+--------
+There is no automated way to compile the code under Windows. It should
+be relatively easy to write one, since the source code depends only on
+OpenCV (which has a Windows version) and a decent C++ implementation.

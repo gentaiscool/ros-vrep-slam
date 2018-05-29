@@ -1,0 +1,18 @@
+<launch>
+
+  <include file="$(find turtlebot_bringup)/launch/3dsensor.launch" />
+
+  <include file="$(find dlib_detector)/launch/face_detector.launch">
+	<arg name="image_topic" value="/camera/rgb/image_color" />
+    <arg name="detections_topic" value="/facedetector/faces" />
+  </include>
+
+  <include file="$(find localizer)/launch/localizer_node.launch" />
+
+  <node pkg="localizer" type="mapper" name="facemapper" output="screen">
+    <remap from="detections" to="/facedetector/faces" />
+    <remap from="camera_info" to="/camera/rgb/camera_info" />
+    <remap from="mapper" to="/facedetector/markers" />
+  </node>
+
+</launch>

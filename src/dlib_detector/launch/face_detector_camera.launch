@@ -1,0 +1,19 @@
+<launch>
+
+  <node pkg="usb_cam" type="usb_cam_node" name="camera" output="screen">
+    <param name="pixel_format" value="yuyv" />
+    <param name="video_device" type="string" value="/dev/video0" />
+  </node>
+
+  <include file="$(find dlib_detector)/launch/face_detector.launch">
+	<arg name="image_topic" value="/camera/image_raw" />
+	<arg name="detections_topic" value="/detector/faces" />
+  </include>
+
+  <node pkg="detection_msgs" type="overlay_visualizer" name="face_visualizer" output="screen">
+    <remap from="camera" to="/camera/image_raw" />
+    <remap from="detections" to="/detector/faces" />
+    <param name="cleanup_delay" value="0" />
+  </node>
+
+</launch>

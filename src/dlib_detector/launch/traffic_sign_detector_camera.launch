@@ -1,0 +1,20 @@
+<launch>
+
+  <node pkg="usb_cam" type="usb_cam_node" name="camera" output="screen">
+    <param name="pixel_format" value="yuyv" />
+    <param name="video_device" type="string" value="/dev/video0" />
+  </node>
+
+  <include file="$(find dlib_detector)/launch/dlib_detector.launch">
+	<arg name="image_topic" value="/camera/image_raw" />
+	<arg name="detections_topic" value="/detector/traffic_signs" />
+    <arg name="detector" value="$(find dlib_detector)/data/traffic_signs.dat"/>
+  </include>
+
+  <node pkg="detection_msgs" type="overlay_visualizer" name="traffic_sign_visualizer" output="screen">
+    <remap from="camera" to="/camera/image_raw" />
+    <remap from="detections" to="/detector/traffic_signs" />
+    <param name="cleanup_delay" value="0" />
+  </node>
+
+</launch>

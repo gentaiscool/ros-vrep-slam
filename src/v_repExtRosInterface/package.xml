@@ -1,0 +1,57 @@
+<package>
+  <name>vrep_ros_interface</name>
+  <description>V-REP plugin for ROS interface</description>
+  <maintainer email="marc@coppeliarobotics.com">Marc</maintainer>
+  <version>3.4.0</version>
+  <author>Federico Ferri</author>
+  <license>GPLv3</license>
+  <url>http://www.coppeliarobotics.com</url>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rosmsg</build_depend>
+  <build_depend>libopencv-dev</build_depend>
+  <build_depend>cv_bridge</build_depend>
+  <build_depend>image_transport</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>actionlib_msgs</build_depend>
+  <build_depend>control_msgs</build_depend>
+  <build_depend>diagnostic_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>map_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>pcl_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>shape_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>tf2_geometry_msgs</build_depend>
+  <build_depend>tf2_msgs</build_depend>
+  <build_depend>tf2_sensor_msgs</build_depend>
+  <build_depend>trajectory_msgs</build_depend>
+  <build_depend>visualization_msgs</build_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>libopencv-dev</run_depend>
+  <run_depend>image_transport</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>brics_actuator</run_depend>
+  <run_depend>cv_bridge</run_depend>
+  <run_depend>perception_pcl</run_depend>
+  <run_depend>rosconsole</run_depend>
+  <run_depend>roslib</run_depend>
+  <run_depend>actionlib_msgs</run_depend>
+  <run_depend>control_msgs</run_depend>
+  <run_depend>diagnostic_msgs</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>map_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>pcl_msgs</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>shape_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>tf2_geometry_msgs</run_depend>
+  <run_depend>tf2_msgs</run_depend>
+  <run_depend>tf2_sensor_msgs</run_depend>
+  <run_depend>trajectory_msgs</run_depend>
+  <run_depend>visualization_msgs</run_depend>
+</package>
+
+

@@ -1,0 +1,8 @@
+prefix=/home/genta/Desktop/robotics_project/catkin_ws/devel
+
+Name: visual_servo
+Description: Description of visual_servo
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/genta/Desktop/robotics_project/catkin_ws/devel/lib 
+Requires: 

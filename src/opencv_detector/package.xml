@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+  <name>opencv_detector</name>
+  <version>0.1.0</version>
+  <description>OpenCV object detection.</description>
+  <maintainer email="luka.cehovin@gmail.com">Luka Cehovin</maintainer>
+  <license>BSD</license>
+  <url type="website">https://trac.vicos.si/ros</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>dynamic_reconfigure</build_depend>
+  <build_depend>message_generation</build_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>dynamic_reconfigure</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>localizer</run_depend>
+
+</package>

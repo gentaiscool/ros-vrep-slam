@@ -1,0 +1,8 @@
+prefix=/home/genta/Desktop/robotics_project/catkin_ws/devel
+
+Name: opencv_detector
+Description: Description of opencv_detector
+Version: 0.1.0
+Cflags: 
+Libs: -L/home/genta/Desktop/robotics_project/catkin_ws/devel/lib 
+Requires: message_runtime

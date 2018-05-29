@@ -1,0 +1,9 @@
+<launch>
+	<node pkg="ferns_detector" type="detector" name="ferns_detector" output="screen">
+	<param name = "image_topic" type="string" value="/camera/rgb/image_color" />
+    <param name = "show_cv_window" type="bool" value="true" />
+    <param name = "load_at_start" type="bool" value="true" />
+    <param name = "activate_at_start" type="bool" value="true" />
+    <param name = "model" type="string" value="TODO" />
+	</node>
+</launch>

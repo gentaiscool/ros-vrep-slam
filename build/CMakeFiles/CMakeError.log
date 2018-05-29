@@ -1,0 +1,55 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/genta/Desktop/robotics_project/catkin_ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_05b38/fast"
+/usr/bin/make -f CMakeFiles/cmTC_05b38.dir/build.make CMakeFiles/cmTC_05b38.dir/build
+make[1]: Entering directory '/home/genta/Desktop/robotics_project/catkin_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_05b38.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_05b38.dir/CheckSymbolExists.c.o   -c /home/genta/Desktop/robotics_project/catkin_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_05b38
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_05b38.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_05b38.dir/CheckSymbolExists.c.o  -o cmTC_05b38 -rdynamic 
+CMakeFiles/cmTC_05b38.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_05b38.dir/build.make:97: recipe for target 'cmTC_05b38' failed
+make[1]: *** [cmTC_05b38] Error 1
+make[1]: Leaving directory '/home/genta/Desktop/robotics_project/catkin_ws/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_05b38/fast' failed
+make: *** [cmTC_05b38/fast] Error 2
+
+File /home/genta/Desktop/robotics_project/catkin_ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/genta/Desktop/robotics_project/catkin_ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_34066/fast"
+/usr/bin/make -f CMakeFiles/cmTC_34066.dir/build.make CMakeFiles/cmTC_34066.dir/build
+make[1]: Entering directory '/home/genta/Desktop/robotics_project/catkin_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_34066.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_34066.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_34066
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_34066.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_34066.dir/CheckFunctionExists.c.o  -o cmTC_34066 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_34066.dir/build.make:97: recipe for target 'cmTC_34066' failed
+make[1]: *** [cmTC_34066] Error 1
+make[1]: Leaving directory '/home/genta/Desktop/robotics_project/catkin_ws/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_34066/fast' failed
+make: *** [cmTC_34066/fast] Error 2
+
+

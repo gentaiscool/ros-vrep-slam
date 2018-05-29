@@ -1,0 +1,11 @@
+<launch>
+  <arg name="image_topic"/>
+  <arg name="detections_topic" default="/dlib_detector/detections"/>
+  <arg name="toggle_topic" default="/dlib_detector/toggle"/>
+
+  <node pkg="dlib_detector" type="face_detector" name="face_detector" output="screen">
+    <remap from="camera" to="$(arg image_topic)" />
+    <remap from="detections" to="$(arg detections_topic)" />
+  </node>
+
+</launch>

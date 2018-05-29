@@ -1,0 +1,2 @@
+detection_msgs:dlib_detector:ferns_detector:opencv_detector:project:v_repExtRosInterface:visual_servo
+-DCATKIN_DEVEL_PREFIX=/home/genta/Desktop/robotics_project/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/genta/Desktop/robotics_project/catkin_ws/install -G Unix Makefiles

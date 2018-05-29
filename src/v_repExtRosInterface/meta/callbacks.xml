@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml-stylesheet type="text/xsl" href="callbacks.xsl"?>
+
+<plugin name="RosInterface" author="federico.ferri.it@gmail.com">
+    <description>This plugin provides an interface with the ROS API</description>
+    <command name="subscribe">
+        <description>Subscribe to a topic.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="topicName" type="string">
+                <description>topic name, e.g.: '/cmd_vel'</description>
+            </param>
+            <param name="topicType" type="string">
+                <description>topic type, e.g.: 'geometry_msgs::Twist'</description>
+            </param>
+            <param name="topicCallback" type="string">
+                <description>name of the callback function, which will be called with a single argument of type table containing the message payload, e.g.: {linear={x=1.5, y=0.0, z=0.0}, angular={x=0.0, y=0.0, z=-2.3}}</description>
+            </param>
+            <param name="queueSize" type="int" default="1">
+                <description>(optional) queue size</description>
+            </param>
+        </params>
+        <return>
+            <param name="subscriberHandle" type="int">
+                <description>a handle to the ROS subscriber</description>
+            </param>
+        </return>
+    </command>
+    <command name="shutdownSubscriber">
+        <description>Unsubscribe the callback associated with this subscriber.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="subscriberHandle" type="int">
+                <description>the subscriber handle</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="subscriberTreatUInt8ArrayAsString">
+        <description>After calling this function, this subscriber will treat uint8 arrays as string. Using strings should be in general much faster that using int arrays in Lua.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="subscriberHandle" type="int">
+                <description>the subscriber handle</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="advertise">
+        <description>Advertise a topic and create a topic publisher.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="topicName" type="string">
+                <description>topic name, e.g.: '/cmd_vel'</description>
+            </param>
+            <param name="topicType" type="string">
+                <description>topic type, e.g.: 'geometry_msgs::Twist'</description>
+            </param>
+            <param name="queueSize" type="int" default="1">
+                <description>(optional) queue size</description>
+            </param>
+            <param name="latch" type="bool" default="false">
+                <description>(optional) latch topic</description>
+            </param>
+        </params>
+        <return>
+            <param name="publisherHandle" type="int">
+                <description>a handle to the ROS publisher</description>
+            </param>
+        </return>
+    </command>
+    <command name="shutdownPublisher">
+        <description>Shutdown the advertisement associated with this publisher.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="publisherHandle" type="int">
+                <description>the publisher handle</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="publisherTreatUInt8ArrayAsString">
+        <description>After calling this function, this publisher will treat uint8 arrays as string. Using strings should be in general much faster that using int arrays in Lua.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="publisherHandle" type="int">
+                <description>the publisher handle</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="publish">
+        <description>Publish a message on the topic associated with this publisher.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="publisherHandle" type="int">
+                <description>the publisher handle</description>
+            </param>
+            <param name="message" type="table" skip="true">
+                <description>the message to publish</description>
+            </param>
+            <!-- don't read 'message' param from stack, and don't clear stack
+                 after input param parsing, so that 'message' is still on stack
+                 when calling the C++ callback -->
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="serviceClient">
+        <description>Create a service client.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="serviceName" type="string">
+                <description>topic name, e.g.: '/cmd_vel'</description>
+            </param>
+            <param name="serviceType" type="string">
+                <description>topic type, e.g.: 'geometry_msgs::Twist'</description>
+            </param>
+        </params>
+        <return>
+            <param name="serviceClientHandle" type="int">
+                <description>a handle to the ROS service client</description>
+            </param>
+        </return>
+    </command>
+    <command name="shutdownServiceClient">
+        <description>Shutdown the service client.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="serviceClientHandle" type="int">
+                <description>the service client handle</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="serviceClientTreatUInt8ArrayAsString">
+        <description>After calling this function, this service client will treat uint8 arrays as string. Using strings should be in general much faster that using int arrays in Lua.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="serviceClientHandle" type="int">
+                <description>the service client handle</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="call">
+        <description>Call the service associated with this service client.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="serviceClientHandle" type="int">
+                <description>the service client handle</description>
+            </param>
+            <param name="request" type="table" skip="true">
+                <description>the message to publish</description>
+            </param>
+            <!-- don't read 'request' param from stack, and don't clear stack
+                 after input param parsing, so that 'request' is still on stack
+                 when calling the C++ callback -->
+        </params>
+        <return>
+            <param name="result" type="table" skip="true">
+                <description>the response message, if the call succeeded</description>
+            </param>
+        </return>
+    </command>
+    <command name="advertiseService">
+        <description>Advertise a service and create a service server.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="serviceName" type="string">
+                <description>topic name, e.g.: '/cmd_vel'</description>
+            </param>
+            <param name="serviceType" type="string">
+                <description>topic type, e.g.: 'geometry_msgs::Twist'</description>
+            </param>
+            <param name="serviceCallback" type="string">
+                <description>name of the callback function, which will be called with a single argument of type table containing the service request payload; it must return another table containing the response</description>
+            </param>
+        </params>
+        <return>
+            <param name="serviceServerHandle" type="int">
+                <description>a handle to the ROS service server</description>
+            </param>
+        </return>
+    </command>
+    <command name="shutdownServiceServer">
+        <description>Shutdown the service server.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="serviceServerHandle" type="int">
+                <description>the service server handle</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="serviceServerTreatUInt8ArrayAsString">
+        <description>After calling this function, this service server will treat uint8 arrays as string. Using strings should be in general much faster that using int arrays in Lua.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="serviceServerHandle" type="int">
+                <description>the service server handle</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="sendTransform">
+        <description>Publish a TF transformation between frames.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="transform" type="table" skip="true">
+                <description>the transformation expressed as a geometry_msgs/TransformStamped message, i.e. {header={stamp=timeStamp, frame_id='...'}, child_frame_id='...', transform={translation={x=..., y=..., z=...}, rotation={x=..., y=..., z=..., w=...}}}</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="sendTransforms">
+        <description>Publish several TF transformations between frames.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="transforms" type="table" skip="true">
+                <description>an array of geometry_msgs/TransformStamped messages</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="imageTransportSubscribe">
+        <description>Subscribe to a topic using ImageTransport.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="topicName" type="string">
+                <description>topic name, e.g.: '/cmd_vel'</description>
+            </param>
+            <param name="topicCallback" type="string">
+                <description>name of the callback function, which will be called as: topicCallback(string data, number width, number height)</description>
+            </param>
+            <param name="queueSize" type="int" default="1">
+                <description>(optional) queue size</description>
+            </param>
+        </params>
+        <return>
+            <param name="subscriberHandle" type="int">
+                <description>a handle to the ROS subscriber</description>
+            </param>
+        </return>
+    </command>
+    <command name="imageTransportShutdownSubscriber">
+        <description>Unsubscribe the callback associated with this subscriber using ImageTransport.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="subscriberHandle" type="int">
+                <description>the subscriber handle</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="imageTransportAdvertise">
+        <description>Advertise a topic and create a topic publisher using ImageTransport.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="topicName" type="string">
+                <description>topic name, e.g.: '/cmd_vel'</description>
+            </param>
+            <param name="queueSize" type="int" default="1">
+                <description>(optional) queue size</description>
+            </param>
+        </params>
+        <return>
+            <param name="publisherHandle" type="int">
+                <description>a handle to the ROS publisher</description>
+            </param>
+        </return>
+    </command>
+    <command name="imageTransportShutdownPublisher">
+        <description>Shutdown the advertisement associated with this publisher using ImageTransport.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="publisherHandle" type="int">
+                <description>the publisher handle</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="imageTransportPublish">
+        <description>Publish a message on the topic associated with this publisher using ImageTransport.</description>
+        <see-also>
+            <!--command name="..." /-->
+        </see-also>
+        <params>
+            <param name="publisherHandle" type="int">
+                <description>the publisher handle</description>
+            </param>
+            <param name="data" type="string">
+                <description>the image data</description>
+            </param>
+            <param name="width" type="int">
+                <description>image width</description>
+            </param>
+            <param name="height" type="int">
+                <description>image height</description>
+            </param>
+            <param name="frame_id" type="string">
+                <description>frame id</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="getTime">
+        <description>Return the current ROS time (i.e. the time returned by ros::Time::now()).</description>
+        <params>
+            <param name="flag" type="int" default="0">
+                <description>unused: set to zero</description>
+            </param>
+        </params>
+        <return>
+            <param name="time" type="double" default="0">
+                <description>ROS time expressed in seconds</description>
+            </param>
+        </return>
+    </command>
+    <command name="getParamString">
+        <description>Retrieve a string parameter from the ROS Parameter Server.</description>
+        <params>
+            <param name="name" type="string">
+                <description>name of the parameter</description>
+            </param>
+            <param name="defaultValue" type="string" default="">
+                <description>default value returned when parameter does not exist</description>
+            </param>
+        </params>
+        <return>
+            <param name="exists" type="bool">
+                <description>true if the param exists otherwise false</description>
+            </param>
+            <param name="value" type="string" default="">
+                <description>the value of the requested parameter</description>
+            </param>
+        </return>
+    </command>
+    <command name="getParamInt">
+        <description>Retrieve an integer parameter from the ROS Parameter Server.</description>
+        <params>
+            <param name="name" type="string">
+                <description>name of the parameter</description>
+            </param>
+            <param name="defaultValue" type="int" default="0">
+                <description>default value returned when parameter does not exist</description>
+            </param>
+        </params>
+        <return>
+            <param name="exists" type="bool">
+                <description>true if the param exists otherwise false</description>
+            </param>
+            <param name="value" type="int" default="0">
+                <description>the value of the requested parameter</description>
+            </param>
+        </return>
+    </command>
+    <command name="getParamDouble">
+        <description>Retrieve a double parameter from the ROS Parameter Server.</description>
+        <params>
+            <param name="name" type="string">
+                <description>name of the parameter</description>
+            </param>
+            <param name="defaultValue" type="double" default="0.0">
+                <description>default value returned when parameter does not exist</description>
+            </param>
+        </params>
+        <return>
+            <param name="exists" type="bool">
+                <description>true if the param exists otherwise false</description>
+            </param>
+            <param name="value" type="double" default="0.0">
+                <description>the value of the requested parameter</description>
+            </param>
+        </return>
+    </command>
+    <command name="getParamBool">
+        <description>Retrieve a boolean parameter from the ROS Parameter Server.</description>
+        <params>
+            <param name="name" type="string">
+                <description>name of the parameter</description>
+            </param>
+            <param name="defaultValue" type="bool" default="false">
+                <description>default value returned when parameter does not exist</description>
+            </param>
+        </params>
+        <return>
+            <param name="exists" type="bool">
+                <description>true if the param exists otherwise false</description>
+            </param>
+            <param name="value" type="bool" default="false">
+                <description>the value of the requested parameter</description>
+            </param>
+        </return>
+    </command>
+    <command name="setParamString">
+        <description>Set a string parameter in the ROS Parameter Server.</description>
+        <params>
+            <param name="name" type="string">
+                <description>name of the parameter</description>
+            </param>
+            <param name="value" type="string">
+                <description>value of the parameter</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="setParamInt">
+        <description>Set a integer parameter in the ROS Parameter Server.</description>
+        <params>
+            <param name="name" type="string">
+                <description>name of the parameter</description>
+            </param>
+            <param name="value" type="int">
+                <description>value of the parameter</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="setParamDouble">
+        <description>Set a double parameter in the ROS Parameter Server.</description>
+        <params>
+            <param name="name" type="string">
+                <description>name of the parameter</description>
+            </param>
+            <param name="value" type="double">
+                <description>value of the parameter</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="setParamBool">
+        <description>Set a boolean parameter in the ROS Parameter Server.</description>
+        <params>
+            <param name="name" type="string">
+                <description>name of the parameter</description>
+            </param>
+            <param name="value" type="bool">
+                <description>value of the parameter</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="hasParam">
+        <description>Check wether a parameter exists in the ROS Parameter Server.</description>
+        <params>
+            <param name="name" type="string">
+                <description>name of the parameter</description>
+            </param>
+        </params>
+        <return>
+            <param name="exists" type="bool">
+                <description>true if the parameter exists, false otherwise</description>
+            </param>
+        </return>
+    </command>
+    <command name="deleteParam">
+        <description>Delete a parameter in the ROS Parameter Server.</description>
+        <params>
+            <param name="name" type="string">
+                <description>name of the parameter</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </command>
+    <command name="searchParam">
+        <description>Search a parameter in the ROS Parameter Server, looking in the closest namespace.</description>
+        <params>
+            <param name="name" type="string">
+                <description>name of the parameter</description>
+            </param>
+        </params>
+        <return>
+            <param name="found" type="bool">
+                <description>true if the parameter has been found</description>
+            </param>
+            <param name="name" type="string">
+                <description>name of the parameter which has been found</description>
+            </param>
+        </return>
+    </command>
+    <script-function name="subscriberCallback">
+        <description>Callback for ROS subscriber.</description>
+        <params>
+            <param name="message" type="table" skip="true">
+                <description>the topic payload (i.e. the message)</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </script-function>
+    <script-function name="imageTransportCallback">
+        <description>Callback for ROS ImageTransport subscriber.</description>
+        <params>
+            <param name="data" type="string">
+                <description>the image data</description>
+            </param>
+            <param name="width" type="int">
+                <description>image width</description>
+            </param>
+            <param name="height" type="int">
+                <description>image height</description>
+            </param>
+        </params>
+        <return>
+        </return>
+    </script-function>
+</plugin>

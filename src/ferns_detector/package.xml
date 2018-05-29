@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<package>
+  <name>ferns_detector</name>
+  <version>0.1.0</version>
+  <description>The Ferns planar object detector ROS package</description>
+
+  <maintainer email="luka.cehovin@fri.uni-lj.si">Luka Čehovin</maintainer>
+
+  <license>GPL2</license>
+  <url type="website">https://trac.vicos.si/ros</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>genmsg</buildtool_depend>
+
+  <build_depend>genmsg</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>opencv2</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>cv_bridge</build_depend>
+  <build_depend>image_transport</build_depend>
+
+  <run_depend>std_msgs</run_depend>
+  <run_depend>opencv2</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>cv_bridge</run_depend>
+  <run_depend>image_transport</run_depend>
+
+  <export>
+  </export>
+</package>
+
+  <!--depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="std_msgs"/>
+  <depend package="pcl"/>
+  <depend package="pcl_ros"/>
+  <depend package="sensor_msgs"/>
+  <depend package="opencv2"/>
+  <depend package="cv_bridge"/>
+  <depend package="image_transport"/-->
+
+

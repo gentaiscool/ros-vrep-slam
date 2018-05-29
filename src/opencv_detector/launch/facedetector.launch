@@ -1,0 +1,15 @@
+<launch>
+  <arg name="image_topic"/>
+  <arg name="detection_topic" default="/facedetector/faces" />
+  <arg name="toggle_topic"  default="/facedetector/toggle" />
+
+  <node pkg="opencv_detector" type="detector" name="facedetector" output="screen">
+    <remap from="camera" to="$(arg image_topic)" />
+    <remap from="detections" to="$(arg detection_topic)" />
+    <remap from="toggle" to="$(arg toggle_topic)" />
+    <param name="detector_file" value="$(find opencv_detector)/data/haarcascade_face.xml"/>
+    <param name="detector_file2" value="$(find opencv_detector)/data/lbpcascade_frontalface.xml"/>
+    <param name="recognition_file" value="$(find opencv_detector)/training-data"/>
+    <param name="show_cv_window" type="bool" value="true" />
+  </node>
+</launch>

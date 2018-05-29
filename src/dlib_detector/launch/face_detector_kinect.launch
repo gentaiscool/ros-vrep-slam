@@ -1,0 +1,16 @@
+<launch>
+
+  <include file="$(find turtlebot_bringup)/launch/3dsensor.launch" />
+
+  <include file="$(find dlib_detector)/launch/face_detector.launch">
+	<arg name="image_topic" value="/camera/rgb/image_color" />
+    <arg name="detections_topic" value="/facedetector/faces" />
+  </include>
+
+  <node pkg="detection_msgs" type="overlay_visualizer" name="face_visualizer" output="screen">
+    <remap from="camera" to="/camera/rgb/image_color" />
+    <remap from="detections" to="/facedetector/faces" />
+    <param name="cleanup_delay" value="0" />
+  </node>
+
+</launch>
