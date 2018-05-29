@@ -8,10 +8,11 @@ https://youtu.be/n-XK24o42Oo
 In this project, we use Ubuntu 16.04 LTS operating system. 
 
 Our project requires several libraries and packages as follows:
-- ROS kinetic, see http://wiki.ros.org/kinetic/Installation/Ubuntu
-- V-REP 3.5.0
-- OpenCV
+- ROS kinetic full, see http://wiki.ros.org/kinetic/Installation/Ubuntu
+- V-REP 3.5.0 EDU PRO, see http://www.coppeliarobotics.com/downloads.html
+- OpenCV 3.3 for Python, C++
 - Hector slam library
+- g++ 5.5 or later (you may face some compilation issues with older version)
 
 ## Additional Libraries
 ```
@@ -21,17 +22,29 @@ sudo apt install ros-kinetic-hector-slam
 
 ## Prepare Workspace:
 ```
+# git clone this project
+git clone https://github.com/gentaiscool/elec6910r-ros-project.git
+# make sure you remove build and devel directories
+rm -rf ./build ./devel
+
 # install ROS kinetic from http://wiki.ros.org/kinetic/Installation/Ubuntu
 # install V-REP 3.5.0 from http://www.coppeliarobotics.com/downloads.html
 Prepare the workspace
 # To prepare the workspace
 echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
-mkdir -p ~/catkin_ws/src
-cd ~/catkin_ws/
+cd ./catkin_ws/
 catkin_make
-echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+echo "source ./catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
+
+# copy libv_repExtRosInterface to V-REP directory
+cd catkin_ws/devel/lib
+cp libv_repExtRosInterface.so  ~/V-REP
+
+# double check if you have the following programs:
+rviz
+rqt_graph
 ```
 ## Run the project:
 ```
