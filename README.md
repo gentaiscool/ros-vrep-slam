@@ -1,5 +1,5 @@
 # elec6910r-ros-project
-Final project using ROS and V-REP for Robot Mapping and Localization. To further
+Final project using ROS and V-REP for Robot Mapping and Localization.
 
 ## Setup
 In this project, we use Ubuntu 16.04 LTS operating system. 
@@ -50,6 +50,7 @@ roslaunch hector.launch
 <img src="images/rosgraph.png" width="400"/>
 
 ### Keyboard control
+Our code is based on key_teleop.py script. We changed the speed and the publisher node.
 <img src="images/keyboard.png" width="400"/>
 
 ```
@@ -58,9 +59,11 @@ rosrun project key_teleop.py
 ```
 
 ### Visual Servo
+We added some heuristics for object tracking
 <img src="images/visual_servoing.png" width="400"/>
 
 ### Face recognition
+In this example, we use President Obama's face
 <img src="images/face_detection.png" width="400"/>
 
 Demo video: https://youtu.be/n-XK24o42Oo
