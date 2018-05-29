@@ -1,21 +1,22 @@
 # elec6910r-ros-project
-Final project using ROS and V-REP for Robot Mapping and Localization
+Final project using ROS and V-REP for Robot Mapping and Localization. To further
 
 ## Setup
+In this project, we use Ubuntu 16.04 LTS operating system. 
+
 Our project requires several libraries and packages as follows:
 - ROS kinetic, see http://wiki.ros.org/kinetic/Installation/Ubuntu
 - V-REP 3.5.0
 - OpenCV
 - Hector slam library
 
-# Additional Libraries
+## Additional Libraries
 ```
 # install hector-slam
 sudo apt install ros-kinetic-hector-slam
 ```
 
-In this project, we use Ubuntu 16.04 LTS operating system. 
-### Prepare Workspace:
+## Prepare Workspace:
 ```
 # install ROS kinetic from http://wiki.ros.org/kinetic/Installation/Ubuntu
 # install V-REP 3.5.0 from http://www.coppeliarobotics.com/downloads.html
@@ -29,7 +30,7 @@ catkin_make
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
-### Run the project:
+## Run the project:
 ```
 roscore
 
@@ -42,6 +43,25 @@ rosrun project key_teleop.py
 # Load the launcher 
 roslaunch hector.launch
 ```
+
+## Features
+
+### Ros graph
+<img src="images/rosgraph.png" width="400"/>
+
+### Keyboard control
+<img src="images/keyboard.png" width="400"/>
+
+```
+# Load keyboard controller
+rosrun project key_teleop.py
+```
+
+### Visual Servo
+<img src="images/visual_servoing.png" width="400"/>
+
+### Face recognition
+<img src="images/face_detection.png" width="400"/>
 
 Demo video: https://youtu.be/n-XK24o42Oo
 
