@@ -7,7 +7,12 @@ Our project requires several libraries and packages as follows:
 - V-REP 3.5.0
 - OpenCV
 - Hector slam library
-\end{itemize}
+
+# Additional Libraries
+```
+# install hector-slam
+sudo apt install ros-kinetic-hector-slam
+```
 
 In this project, we use Ubuntu 16.04 LTS operating system. 
 ### Prepare Workspace:
@@ -40,10 +45,11 @@ roslaunch hector.launch
 
 Demo video: https://youtu.be/n-XK24o42Oo
 
-By
-- Genta Indra Winata
-- Lin Zhaojiang
+#### Authors
+- Genta Indra Winata (gentaindrawinata@gmail.com / giwinata@connect.ust.hk)
+- Lin Zhaojiang (zlinao@connect.ust.hk)
 
-Acknowledgement: 
+#### Acknowledgement
 - Prof. LIU Ming 
 - TA: HUANG Kan
+- We also thank Chien-Sheng Wu for the assistance
