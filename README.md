@@ -1,5 +1,4 @@
-# elec6910r-ros-project
-Final project using ROS and V-REP for Robot Mapping and Localization.
+# ROS and V-REP for Robot Mapping and Localization
 
 ## Demo video
 https://youtu.be/n-XK24o42Oo
@@ -90,11 +89,16 @@ In this example, we detect President Obama's face.
 
 <img src="images/face_detection.png" width="400"/>
 
-#### Authors
+### Authors
 - Genta Indra Winata (gentaindrawinata@gmail.com / giwinata@connect.ust.hk)
 - Lin Zhaojiang (zlinao@connect.ust.hk)
 
-#### Acknowledgement
+### Note
+
+ELEC6910R - Robotic Perception and Learning Final Project in HKUST
+
+### Acknowledgement
 - Prof. LIU Ming 
 - TA: HUANG Kan
 - We also thank Chien-Sheng Wu for the assistance
+
