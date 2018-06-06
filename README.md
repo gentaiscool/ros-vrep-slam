@@ -1,4 +1,5 @@
 # ROS and V-REP for Robot Mapping and Localization
+It is an implementation of robot mapping and localization using <a href="http://www.ros.org/">Robot Operating System (ROS)</a> and V-REP simulator. In this project, the robot can go around the unknown area and use laser sensor to generate the mapping. In addition, we have tasks such as visual servoing and face recognition using camera and OpenCV.
 
 ### Demo video
 https://youtu.be/n-XK24o42Oo
@@ -79,7 +80,7 @@ Our code is based on key_teleop.py script. We changed the speed and the publishe
 rosrun project key_teleop.py
 ```
 
-#### Visual Servo
+#### Visual Servoing
 In this task, the machine has to track and follow the yellow ball (#FFFF00). 
 
 <img src="images/visual_servoing.png" width="400"/>
@@ -94,7 +95,6 @@ In this example, we detect President Obama's face.
 - Lin Zhaojiang (zlinao@connect.ust.hk)
 
 #### Note
-
 ELEC6910R - Robotic Perception and Learning Final Project in HKUST
 
 #### Acknowledgement
